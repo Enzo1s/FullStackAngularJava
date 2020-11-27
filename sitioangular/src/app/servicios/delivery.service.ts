@@ -62,21 +62,24 @@ export class DeliveryService {
 
 
 
-   updatePlato( platoUpdate: Plato) {
-      return this.http.post<Plato>( this.platoAdminUrl, null, {params: new HttpParams().set("action", "actualizar").set("id", platoUpdate.id)
+   updatePlato( platoUpdate: Plato, idPlato:string) {
+    return this.http.put(this.platoAdminUrl+idPlato,platoUpdate);
+      /* return this.http.put<Plato>( this.platoAdminUrl, platoUpdate, {params: new HttpParams().set("id", platoUpdate.id)
       .set("nombre", platoUpdate.nombre).set("imagenPath", platoUpdate.imagenPath).set("precio", platoUpdate.precio).set("rubro", platoUpdate.rubro)
       }).pipe(map( res => {
               console.log(res.nombre);
               return res;
-            }));
+            })); */
     }
 
     deletePlato(idPlato: string){
-      return this.http.post( this.platoAdminUrl, null, {params: new HttpParams().set("action", "eliminar").set("id", idPlato)})
+      //return this.http.post(this.platoAdminUrl+idPlato,null);
+      return this.http.delete(this.platoAdminUrl+idPlato);
+      /* return this.http.post( this.platoAdminUrl, null, {params: new HttpParams().set("delete", idPlato)})
             .pipe(
             map( res => {
               console.log(res);
               return res;
-            }));
+            })); */
     }
 }
